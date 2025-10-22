@@ -3,6 +3,8 @@
 #include <iostream>
 #include <sstream>
 #include <fstream>
+#include <string>
+#include <cstdint>
 
 //#include "../heap.h" //bring in your heap implementation
 #include "../heap.h"
@@ -98,8 +100,8 @@ bool Circuit::parse(const char* fname)
                     std::string s_output;
                     getline(ss, s_output, ',');
                     m_gates.push_back(new And2Gate(m_wires[stoi(s_in1)], m_wires[stoi(s_in2)], m_wires[stoi(s_output)]));
-                }
-                if(s_type == "OR2")
+
+                } else if(s_type == "OR2")
                 {
                     std::string s_in1;
                     getline(ss, s_in1, ',');
@@ -108,8 +110,14 @@ bool Circuit::parse(const char* fname)
                     std::string s_output;
                     getline(ss, s_output, ',');
                     m_gates.push_back(new Or2Gate(m_wires[stoi(s_in1)], m_wires[stoi(s_in2)], m_wires[stoi(s_output)]));
+
+                } else if(s_type == "NOT"){ //Add code here to support the NOT gate type
+                std::string s_input;
+                getline(ss, s_input, ',');
+                std::string s_output;
+                getline(ss, s_output, ',');
+                m_gates.push_back(new NotGate(m_wires[stoi(s_input)], m_wires[stoi(s_output)]));
                 }
-                //Add code here to support the NOT gate type
             }
         }
         if(line == "INJECT")

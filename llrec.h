@@ -86,7 +86,7 @@ Node* llfilter(Node* head, Comp pred)
   if(head == nullptr) return nullptr;
 
   Node* nxt_item = head->next;
-  Node* filtered = llfilter(nxt_item, pred); // <-- to have 
+  Node* filtered = llfilter(nxt_item, pred); // <-- to have the items from list 1 -> llfilter (discarding the removed values)
 
   if(pred(head->val)){
     //remove item
